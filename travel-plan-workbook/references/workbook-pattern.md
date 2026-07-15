@@ -5,7 +5,7 @@ Use this reference after `travel-plan-workbook` triggers and the task involves w
 ## Intake Checklist
 
 - Source: template workbook path, destination, departure city, return destination, travelers, date range, whether the range includes outbound/return flight days, planned or estimated flight times, must-see places, pace, budget, hotel constraints, payment assumptions, and visa/entry constraints.
-- Italy-style template: when requested, clone `../assets/italy-ten-day-route-template.xlsx` into `outputs/` before editing. Preserve the three sheets, title merges, column widths, row heights, fills, and image anchors; only replace destination-specific data and route images.
+- Italy-style template: when requested, clone `../assets/template.xlsx` into `outputs/` before editing. Preserve the three sheets, title merges, column widths, row heights, fills, and image anchors; only replace destination-specific data and route images.
 - Flight-day timing: before proposing the itinerary, estimate airport transfer, check-in, baggage, border-control, and time-zone effects. Treat arrival and departure days as partial by default; do not schedule them as full sightseeing days unless the user explicitly confirms they are not flight days.
 - Workbook shape: sheet names, used ranges, images, formulas, merged cells, filters, hidden rows/columns, and current column order.
 - Research needs: official attraction pages or reliable current sources for openings, closures, ticketing, transport, and public holidays. Browse when information can change.

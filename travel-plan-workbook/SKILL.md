@@ -15,7 +15,7 @@ For `.xlsx` authoring, prefer the standard workbook tool specified by the active
 
 ## Italy-style Workbook Template
 
-When a user requests the Italy-style travel workbook, use `assets/italy-ten-day-route-template.xlsx` as a read-only source. Copy it to a new output path before editing. Preserve its three-sheet structure, merged title areas, column widths, row heights, fills, and route-image cells; replace only destination-specific content, links, formulas, and route images. Never overwrite the retained template asset.
+When a user requests the Italy-style travel workbook, use `assets/template.xlsx` as a read-only source. Copy it to a new output path before editing. Preserve its three-sheet structure, merged title areas, column widths, row heights, fills, and route-image cells; replace only destination-specific content, links, formulas, and route images. Never overwrite the retained template asset.
 
 If the user asks only for advice, route rearrangement, attraction ideas, or a payment/cash estimate, answer directly without editing files unless they explicitly ask to update the workbook.
 
