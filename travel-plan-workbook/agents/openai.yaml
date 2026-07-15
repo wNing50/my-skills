@@ -1,0 +1,4 @@
+interface:
+  display_name: "Travel Plan Workbook"
+  short_description: "Create confirmed travel itinerary Excel workbooks with route maps."
+  default_prompt: "Use $travel-plan-workbook to create a travel itinerary Excel workbook from my destination, dates, and preferences."
