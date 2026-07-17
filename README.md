@@ -1,6 +1,10 @@
-# My Skills
+﻿# My Skills
+
+[Chinese](README.zh-CN.md)
 
 Some skills using in my life.
+
+This repository stores Codex skills I use in daily life and work. Each skill is meant to capture reusable workflows, templates, and practical guardrails instead of one-off scripts.
 
 ## Skills
 
@@ -14,6 +18,6 @@ This skill is designed for practical travel planning workbooks with:
 - route-map image placement and visual verification;
 - hotel, reservation, closure-risk, and source tracking;
 - budget and cash/card estimates;
-- reusable Italy-style Excel workbook formatting via `assets/template.xlsx`.
-
-It keeps the workbook language consistent across sheet text and generated route-map labels, and requires visual checks so blocked map tiles or malformed images are not inserted into the final workbook.
+- reusable Italy-style Excel workbook formatting via `assets/template.xlsx`;
+- consistent language across workbook text and generated route-map labels;
+- checks that blocked map tiles, error pages, or malformed images are not inserted into final workbooks.
