@@ -4,9 +4,11 @@ Use this reference after `travel-plan-workbook` triggers and the task involves w
 
 ## Intake Checklist
 
-- Source: template workbook path, destination, departure city, return destination, travelers, date range, whether the range includes outbound/return flight days, planned or estimated flight times, must-see places, pace, budget, hotel constraints, payment assumptions, and visa/entry constraints.
+- Send one consolidated intake request after source/template inspection. Collect: template path, destination, departure city, return destination, travelers, date range/weekdays, whether outbound/return flight days are included, airports and planned/estimated flight times, must-see places, pace, budget, hotel constraints, payment assumptions, visa/entry constraints, and the preferred intercity-transfer window (`morning`/`afternoon`/`evening`). Do not serially ask one basic field per message. Follow up only when an omitted answer materially changes the itinerary.
 - Italy-style template: when requested, clone `../assets/template.xlsx` into `outputs/` before editing. Preserve the three sheets, title merges, column widths, row heights, fills, and image anchors; only replace destination-specific data and route images.
 - Flight-day timing: before proposing the itinerary, estimate airport transfer, check-in, baggage, border-control, and time-zone effects. Treat arrival and departure days as partial by default; do not schedule them as full sightseeing days unless the user explicitly confirms they are not flight days.
+- Intercity timing: schedule each city change in the user's requested morning/afternoon/evening window where feasible. Record door-to-door duration, transfer count, fare, luggage handling, and any exception in both the proposal and main itinerary.
+- Workspace: generate in the current workspace; do not create a Git worktree unless the user explicitly asks for it.
 - Workbook shape: sheet names, used ranges, images, formulas, merged cells, filters, hidden rows/columns, and current column order.
 - Research needs: official attraction pages or reliable current sources for openings, closures, ticketing, transport, and public holidays. Browse when information can change.
 - Output rule: save as a new workbook in `outputs/`. Do not overwrite the source workbook.
@@ -15,9 +17,9 @@ Use this reference after `travel-plan-workbook` triggers and the task involves w
 
 Adapt sheet names to the user's language. If language is unspecified and cannot be inferred from the workbook, default to English.
 
-- `Itinerary` / `行程安排`: day-by-day itinerary.
-- `Lodging and Reservations` / `住宿与预约`: hotels, booking links/sources, cancellation notes, attraction reservation requirements, closure-risk dates.
-- `Cost Estimate` / `费用估算`: transportation, tickets, food, city transit, hotels if included, flights if included, cash/card estimate, currency assumptions.
+- `Itinerary`: day-by-day itinerary.
+- `Lodging and Reservations`: hotels, booking links/sources, cancellation notes, attraction reservation requirements, closure-risk dates.
+- `Cost Estimate`: transportation, tickets, food, city transit, hotels if included, flights if included, cash/card estimate, currency assumptions.
 
 If the user requests three sheets, keep these concerns separate. If a template already has equivalent sheets, reuse the existing names and style.
 
@@ -27,9 +29,7 @@ Use the template's columns when possible. Default to English labels unless the u
 
 `Day`, `Date`, `City`, `Plan`, `Attractions`, `Path`, `Intercity Transport`, `Local Transport`, `Food`, `Lodging`, `Reservations/Closure Risk`, `Intensity`, `Notes`
 
-For Chinese workbooks, localize the same conceptual fields as:
-
-`天数`, `日期`, `城市`, `主要行程`, `景点`, `路径`, `城市间交通`, `市内交通`, `饮食`, `住宿`, `预约/闭馆风险`, `强度评估`, `备注`
+For non-English workbooks, translate the same conceptual fields into the workbook language while retaining this column order.
 
 Rules:
 
@@ -41,30 +41,17 @@ Rules:
 
 ## Route Maps
 
-Generate route images only for rows that have same-day attractions or routeable scenic stops. Leave the path/route cell blank if there are no attractions.
+Load `route-map-pattern.md` before generating, replacing, or reviewing route images.
 
-Route ordering:
+Workbook-level rules:
 
-- Geocode the attractions, then inspect spatial order before drawing.
-- Reduce backtracking by ordering nearby stops in a natural sweep from the likely hotel/station/arrival point to the final area.
-- If user text order causes a loop or repeated crossing, adjust the route order and note the change in the plan before implementation.
-- For multi-city days, use split panels or separate route blocks by city instead of connecting distant cities with a walking line.
-
-Image layout:
-
+- Generate a real map-route image for every row that has same-day attractions or routeable scenic stops.
+- Leave the path/route cell blank only if there are no attractions or routeable stops.
+- Put the route image column immediately after the attractions/scenic-spots column.
+- For multi-city or transfer days, use split city panels instead of one long cross-city route line.
+- Prefer colored route maps unless the template or user asks for another style.
+- Keep titles, stop labels, legends, and map notes in the workbook language.
 - Constrain every picture within the path/route cell; verify the image's right edge is before the next column's left edge.
-- Prefer a wide path column and taller rows for readability. A proven baseline is column width about `105`, row height about `330`, image about `545 x 320` points, centered with small padding.
-- Do not preserve aspect ratio by stretching into a narrow cell. Increase the column/row instead.
-- Use clear map tiles, readable labels, and visible numbered markers. Avoid dark or blurred maps.
-- Match route-map image language to the workbook language. If the workbook is Chinese, route titles, stop labels, legends, and map notes should be Chinese; keep foreign place names only when they are the expected local names or when the user asks for bilingual labels.
-- If using OpenStreetMap/static tiles, include attribution where appropriate in the image or workbook notes. Prefer compliant tile providers for generated static images; if a provider blocks tile use, switch to a reliable permitted source instead of embedding the blocked response.
-
-Image verification:
-
-- Inspect generated route PNGs visually before inserting them into the workbook. File existence, HTTP 200, non-zero size, and correct dimensions are not enough.
-- Check for provider error text such as `403`, `Access blocked`, `policy`, missing-tile warnings, blank tiles, cropped stop markers, overlapping labels, unreadably small labels, and route lines outside the visible map.
-- If stops are dense, adjust zoom, crop, or per-label offsets and regenerate the image before workbook insertion.
-- After inserting images, render/export the workbook or copy used ranges to preview images and confirm the pictures remain inside the path/route cells.
 
 ## Formatting
 
@@ -106,6 +93,9 @@ Before final response:
 - Confirm main sheet column order matches the user's requested order.
 - Count route images and compare with rows that should have route images.
 - Verify no route image overlaps the next column.
+- Generate and inspect a contact sheet or equivalent preview of all route images.
+- Confirm multi-city or transfer days use split panels with station/airport endpoints instead of cross-city lines.
+- Confirm dense city-center route labels are readable.
 - Confirm route-map image text uses the workbook language unless the user requested otherwise.
 - Confirm route PNGs are real map images, not blocked-tile/error-page screenshots.
 - Confirm no-attraction rows have blank route cells.
