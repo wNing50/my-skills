@@ -1,0 +1,7 @@
+interface:
+  display_name: "A-share ETF Backtest"
+  short_description: "AKShare qfq ETF backtests with Chinese reports"
+  default_prompt: "Use $a-share-etf-permanent-portfolio-backtest to backtest an A-share ETF portfolio with AKShare qfq prices and Chinese monthly/yearly return reports."
+
+policy:
+  allow_implicit_invocation: true

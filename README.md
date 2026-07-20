@@ -8,6 +8,20 @@ This repository stores Codex skills I use in daily life and work. Each skill is 
 
 ## Skills
 
+### a-share-etf-permanent-portfolio-backtest
+
+Backtests A-share and China ETF portfolios with monthly end-of-month rebalancing.
+
+This skill is designed for portfolio research workflows with:
+
+- AKShare ETF daily close-price fetching;
+- qfq front-adjusted prices by default for dividend-reinvestment style analysis;
+- local wide CSV support for broker or vendor exports;
+- normalized target weights and month-end rebalancing;
+- actual start-date reporting when an ETF has shorter history than the requested range;
+- Chinese report generation with monthly returns, yearly returns, summary Markdown, and contribution analysis;
+- educational portfolio diagnostics without buy/sell recommendations.
+
 ### travel-plan-workbook
 
 Creates and edits travel itinerary Excel workbooks after confirming the real trip window, especially whether the date range includes outbound and return flight days.
