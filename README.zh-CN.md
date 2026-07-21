@@ -34,6 +34,6 @@ Some skills using in my life.
 - 生成并插入路线图图片，并做视觉验收；
 - 记录酒店、预约、闭馆风险和来源链接；
 - 估算预算、现金和刷卡比例；
-- 通过 `assets/template.xlsx` 复用意大利风格 Excel 模板；
+- 通过 `assets/template.xlsx` 复用 Excel 模板；
 - 保持工作簿文字和路线图图片文字语言一致；
 - 避免把被拦截的地图瓦片、错误页或异常图片插入最终工作簿。

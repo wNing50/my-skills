@@ -1,6 +1,6 @@
 ---
 name: a-share-etf-permanent-portfolio-backtest
-description: Use when Codex needs to create, explain, run, or adapt an A-share or China ETF investment portfolio backtest using Harry Browne permanent portfolio style allocation, monthly end-of-month close-price rebalancing, user-provided start year-month, initial capital, ETF tickers, weights, AKShare ETF price fetching, qfq/adjusted-price assumptions, Chinese reports, monthly/yearly returns, contribution analysis, or local CSV/Excel price data.
+description: Use when Codex needs to create, explain, run, or adapt an A-share or China ETF investment portfolio backtest using Harry Browne permanent portfolio style allocation, monthly end-of-month close-price rebalancing, user-provided start year-month, initial capital, ETF tickers, weights, AKShare ETF price fetching, qfq/adjusted-price assumptions, localized reports, monthly/yearly returns, contribution analysis, or local CSV/Excel price data.
 ---
 
 # A-share ETF Permanent Portfolio Backtest
@@ -16,7 +16,7 @@ Before running a backtest, confirm the minimum inputs in one concise intake:
 - Initial capital.
 - Price source. Prefer AKShare when the user approves online public-market data. Use a local wide CSV when the user provides exported data from Tonghuashun, another broker, or a data vendor.
 - Adjustment mode. Prefer `qfq` when the user wants a dividend-reinvestment or total-return style backtest; use unadjusted prices only when matching historical transaction prices.
-- Optional end year-month, fee/slippage assumptions, whether fractional ETF shares are allowed, and whether Chinese report files are desired.
+- Optional end year-month, fee/slippage assumptions, and whether fractional ETF shares are allowed. Do not ask for report language when it is obvious from the user's request; infer it from the user's input language and only ask when the user explicitly needs a different reporting language.
 
 If any required market data is missing, ask the user to provide it or explicitly approve fetching/converting data. AKShare ETF data can change if its upstream public data source changes, so keep the fetched price CSV as an audit artifact.
 
@@ -42,6 +42,17 @@ Default assumptions:
 ## Script
 
 Use `scripts/backtest_permanent_portfolio.py` for deterministic calculation. It supports AKShare fetching or a local wide CSV.
+
+## Output Language
+
+Match human-facing output to the user's requested or implied language:
+
+- Use the language of the user's actual task request for table headers, Markdown summaries, chart labels, file names when practical, and the final answer.
+- If the user explicitly asks for a different output language, follow that explicit language request instead of the message language.
+- If the request mixes languages, infer the reporting language from the instruction text, not IDE context, file names, ticker symbols, or API field names.
+- When the bundled script only has a built-in report option for the inferred language, use it. For example, pass `--zh-cn-reports` for Chinese output.
+- When the inferred language is not built into the script, still localize any reports or summaries you generate or adapt outside the script. Keep machine-oriented raw data files acceptable in English when localization would make them harder to process, but make the primary human-facing artifacts readable in the inferred language.
+- If a fallback implementation is needed because the Python script or data source is unavailable, preserve the same language rule. Do not leave mojibake, untranslated fallback reports, or ASCII-only replacement reports as the primary human-facing output; regenerate readable localized artifacts or clearly label fallback diagnostics as secondary.
 
 AKShare mode:
 
@@ -100,15 +111,20 @@ The script prints the summary path and monthly result path after completion.
 
 ## Output Standards
 
-In the final answer, include:
+In the final answer, use the requested or implied reporting language and include:
 
 - The portfolio and normalized target weights.
 - Actual start and end month-end dates used.
 - Initial capital, final value, cumulative return, and annualized return when at least one year is covered.
+- Express every return-rate style value in human-facing output as a percentage string, not a decimal. This includes monthly return, yearly return, cumulative return, annualized return, drawdown, volatility, and contribution-to-capital rates.
 - A short note about assumptions and missing costs.
 - Paths to generated result files.
 - If AKShare was used, the AKShare price CSV path and adjustment mode.
-- If `--zh-cn-reports` was used, the Chinese summary, monthly/yearly return, and contribution paths.
+- If localized reports were requested or inferred, include the localized summary, monthly/yearly return, and contribution paths, with readable localized headers and Markdown summary text.
+
+For CSV or spreadsheet outputs, keep primary localized report columns in percentage format. If raw decimal rates are kept for machine processing, label them explicitly with a `_decimal` suffix or keep them in a clearly secondary raw/diagnostic file; do not mix unlabeled decimal rates into the primary human-facing reports.
+
+For Markdown summaries with tables, make headers readable in common Markdown previews. Use plain Markdown tables for short headers; when localized headers are long or likely to wrap/truncate, use an HTML table with `min-width`, `white-space: nowrap`, and right-aligned numeric columns so the full header text is visible.
 
 When explaining results, distinguish between:
 
