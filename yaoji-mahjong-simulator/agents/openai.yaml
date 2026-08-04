@@ -1,0 +1,4 @@
+interface:
+  display_name: "Yaoji Mahjong Simulator"
+  short_description: "Simulate one human against three PC players in Yaoji Mahjong."
+  default_prompt: "Use $yaoji-mahjong-simulator to host a single-player Yaoji Mahjong round against three PC players."
