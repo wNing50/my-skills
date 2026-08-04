@@ -35,3 +35,15 @@ This skill is designed for practical travel planning workbooks with:
 - reusable Italy-style Excel workbook formatting via `assets/template.xlsx`;
 - consistent language across workbook text and generated route-map labels;
 - checks that blocked map tiles, error pages, or malformed images are not inserted into final workbooks.
+
+### polishing-game-reviews
+
+Lightly polishes game reviews while preserving the writer's voice, stance, and subjective style.
+
+This skill is designed for game-review editing workflows with:
+
+- sentence-level polish rather than full rewrites by default;
+- preservation of the user's opinions, uncertainty, rhythm, and tone;
+- typo, punctuation, transition, repetition, and wording cleanup;
+- safeguards against invented gameplay, plot, performance, monetization, or design claims;
+- required discussion before expansion, added arguments, scoring, titles, or long-form restructuring.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Polishing Game Reviews"
+  short_description: "Lightly polish game reviews while preserving the writer's voice."
+  default_prompt: "Use $polishing-game-reviews to lightly polish this game review without changing my style."
